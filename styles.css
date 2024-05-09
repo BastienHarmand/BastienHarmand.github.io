@@ -1,0 +1,32 @@
+.rotate {
+    border-radius: 0%;
+    cursor: ns-resize;
+  }
+.range {
+    width: "75%";
+ }
+
+ .wrapper {
+    position: relative;
+  }
+  
+  #ciel {
+    position: absolute;
+    top: 0;
+    right: 0;
+  
+    /*
+    *  Styling only, the below can be changed or removed
+    *  depending on your use case
+    */
+    height: 20px;
+    padding: 10px 10px;
+  }
+
+  .container {
+    display: grid;
+  }
+  
+  .content, .overlay {
+    grid-area: 1 / 1;
+  }
