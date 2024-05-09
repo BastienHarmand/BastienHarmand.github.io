@@ -1,3 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg">
-      <img class="rotate" id="img" src="tympan_edit.svg" alt="Wheel image" width="75%">
-</svg>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Astrolabe</title>
+    <link rel="stylesheet" href="styles.css?version=1">
+    <script type="text/javascript">
+     
+function move () {
+    var slider = parseInt(document.getElementById("slider").value);
+    document.getElementById("img").style.transform = "rotate("+slider+"deg)";
+    console.log(slider)
+};
+    </script>
+  </head>
+<body id="body">
+  <meta name="viewport" content="width=device-width">
+  <div>
+    <input type="range" min="-180" max="180" value="0" class="slider" id="slider" oninput="move()" width="75%">
+  </div>
+  <div class="container">
+    <div class="content">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <img class="ciel" id="img" src="ciel_edit.svg" alt="Wheel image 2" width="75%">
+      </svg>
+    </div>
+    <div class="overlay">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <img class="other" id="img 2 " src="tympan_edit.svg" alt="Wheel image" width="75%">
+      </svg>
+    </div>
+  </div>
+  
+</body>
+</html>
