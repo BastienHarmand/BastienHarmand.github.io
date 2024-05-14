@@ -1,35 +1,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Astrolabe</title>
-    <link rel="stylesheet" href="styles.css?version=1">
-    <script type="text/javascript">
-     
-function move () {
-    var slider = parseInt(document.getElementById("slider").value);
-    document.getElementById("img").style.transform = "rotate("+slider+"deg)";
-    console.log(slider)
-};
-    </script>
-  </head>
-<body id="body">
-  <meta name="viewport" content="width=device-width">
-  <div>
-    <input type="range" min="-180" max="180" value="0" class="slider" id="slider" oninput="move()" width="75%">
-  </div>
-  <div class="container">
-    <div class="content">
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <img class="ciel" id="img" src="ciel_edit.svg" alt="Wheel image 2" width="75%">
-      </svg>
-    </div>
-    <div class="overlay">
-      <svg xmlns="http://www.w3.org/2000/svg">
-        <img class="other" id="img 2 " src="tympan_edit.svg" alt="Wheel image" width="75%">
-      </svg>
-    </div>
-  </div>
-  
-</body>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"/>
+
+<html xmlns="http://www.w3.org/1999/xhtml" data-theme="light">
+    <head>
+        <title>Astrolabe</title>
+        <link rel="stylesheet" href="styles.css?version=1">
+        <script type="text/javascript">
+        
+            function set_time () {
+                var slider = parseInt(document.getElementById("slider_time").value);
+                var v = slider/1440
+                var a = 360 * v
+                var t = 24 * v
+                var hour = Math.floor(t)
+                var min = Math.floor(60*(t - hour))
+                hour = (hour < 10 ? "0" : "") + hour;
+                min = (min < 10 ? "0" : "") + min;
+                document.getElementById("rule").style.transform = "rotate("+a+"deg)";
+                console.log(a)
+                document.getElementById("time").value = hour + ":" + min;
+            };
+
+            function set_date () {
+                var slider = parseInt(document.getElementById("slider_date").value);
+                const date = new Date(2024, 0, slider+2);
+                document.getElementById("date").valueAsDate = date;
+                console.log(date.toLocaleDateString());
+                var v = slider/365
+                var a = 360 * v
+                document.getElementById("img").style.transform = "rotate("+a+"deg)";
+            };
+
+        </script>
+    </head>
+    <body id="body">
+        <meta name="viewport" content="width=device-width">
+        
+        <div class="container">
+
+            <div class="content">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <img class="ciel" id="img" src="ciel_edit.svg" alt="Wheel image 2" width="75%">
+                </svg>
+            </div>
+                    <div class="content">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <img class="ciel" id="rule" src="rule.svg" alt="Wheel image 2" width="75%">
+                </svg>
+            </div>
+            <div class="overlay">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <img class="other" id="img 2 " src="tympan_edit.svg" alt="Wheel image" width="75%">
+                </svg>
+            </div>
+        </div>
+    
+    </body>
+    <body onload="set_date(); set_time()">
+        <main class="container-fluid">
+            <div>
+                <label>
+                    Heure
+                    <input type="time" id="time" name="time" aria-label="Time" />
+                    <input type="range" min="0" max="1440" value="0" class="slider" id="slider_time" oninput="set_time()" width="75%">
+                </label>
+                <label>
+                    Date
+                    <input type="date" id="date" name="date" aria-label="Time" />
+                    <input type="range" min="0" max="365" value="0" class="slider" id="slider_date" oninput="set_date()" width="75%">
+                </label>
+            </div>
+        </main>
+    </body>
+
+    
 </html>
